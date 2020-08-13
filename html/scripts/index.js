@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', main)
 
-const depStation = 'Villach Hbf'
+const depStation = 'Salzburg Hbf'
 const arrStation = 'Klagenfurt Hbf'
 
 let clock;

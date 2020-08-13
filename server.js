@@ -8,6 +8,11 @@ const server = http.createServer(requestListener);
 const serverRoot = "html";
 
 const durationInM = 360;
+const includeBuses = false;
+const includeActualOnlyWhenDelayed = true;
+
+//todo: implement more filters to be selectable by client side
+//todo: add textfield for station selection by client
 
 main();
 
@@ -60,7 +65,10 @@ async function requestListener(req, res)
             let actualDate = new Date(dep.when)
             let planDate = new Date(actualDate - dep.delay * 1000)
 
-            res.write(planDate.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) + ";" + (actualDate.getTime() != planDate.getTime() ? actualDate.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) : "") + ";" + (dep.platform == null ? "N/A" : dep.platform) + ";" + dep.line.name.split(' (')[0] + ";" + dep.direction + ";" + dep.station.name + "\n")
+            let delayed = actualDate.getTime() != planDate.getTime()
+
+            if(!includeBuses && !dep.line.name.includes('Bus'))
+                res.write(planDate.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) + ";" + (includeActualOnlyWhenDelayed && !delayed ? "" : actualDate.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }))  + ";" + (dep.platform == null ? "N/A" : dep.platform) + ";" + dep.line.name.split(' (')[0] + ";" + dep.direction + ";" + dep.station.name + "\n")
         }
 
         res.end();
