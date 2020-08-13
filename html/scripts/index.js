@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', main)
 
-const depStation = 'Völkermarkt Kühnsdorf'
-const arrStation = 'St Veit/glan'
+const depStation = 'Villach Hbf'
+const arrStation = 'Klagenfurt Hbf'
 
 let clock;
 
-const maxTableSize = 15;
+const maxTableSize = 25;
 const timetableId = "timetable"
 
 const journeytableId = "journeytable"

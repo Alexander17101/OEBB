@@ -2,7 +2,7 @@ const oebb = require('oebb-hafas')
 const http = require('http');
 const fs = require('fs');
 
-const hostname = "localhost", port = 8080;
+const hostname = "10.0.0.71", port = 8080;
 
 const server = http.createServer(requestListener);
 const serverRoot = "html";
@@ -60,7 +60,7 @@ async function requestListener(req, res)
             let actualDate = new Date(dep.when)
             let planDate = new Date(actualDate - dep.delay * 1000)
 
-            res.write(planDate.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) + ";" + actualDate.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) + ";" + (dep.platform == null ? "N/A" : dep.platform) + ";" + dep.line.name.split(' (')[0] + ";" + dep.direction + ";" + dep.station.name + "\n")
+            res.write(planDate.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) + ";" + (actualDate.getTime() != planDate.getTime() ? actualDate.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) : "") + ";" + (dep.platform == null ? "N/A" : dep.platform) + ";" + dep.line.name.split(' (')[0] + ";" + dep.direction + ";" + dep.station.name + "\n")
         }
 
         res.end();

@@ -1,11 +1,11 @@
 body{
     font-family: Bahnschrift, consolas, monospace;
-    font-size: 11px;
+    font-size: 12pt;
 }
 
 #header p{
     display: inline-block;
-    font-size: 12px;
+    font-size: 13pt;
 }
 
 #timetable{
