@@ -1,0 +1,17 @@
+body{
+    font-family: Bahnschrift, consolas, monospace;
+    font-size: 11px;
+}
+
+#header p{
+    display: inline-block;
+    font-size: 12px;
+}
+
+#timetable{
+    width: 100%;
+    color: white;
+    background-color: #1010FF;
+    border-collapse: collapse;
+    border: none;
+}
