@@ -13,8 +13,8 @@ const durationInM = 360;
 const includeBuses = false;
 const includeActualOnlyWhenDelayed = true;
 
-//todo: implement more filters to be selectable by client side
-//todo: add textfield for station selection by client
+//todo: implement more filters to be selectable by client side wip
+//todo: add textfield for station selection by client done
 //todo: finish arrivals
 
 main();
@@ -28,7 +28,7 @@ async function main()
 
 async function requestListener(req, res)
 {
-    console.log("Request received: " + req.method + " " + req.url)
+    console.log("request from received:  " + req.connection.remoteAddress + "\t" + req.method + " " + req.url)
 
     if (req.url == "/departures" && req.method == "GET")
     {
@@ -69,7 +69,7 @@ async function requestListener(req, res)
 
             let delayed = actualDate.getTime() != planDate.getTime()
 
-            if(!includeBuses && !dep.line.name.includes('Bus'))
+            if(includeBuses || !dep.line.name.includes('Bus'))
                 res.write(planDate.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) + ";" + (includeActualOnlyWhenDelayed && !delayed ? "" : actualDate.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }))  + ";" + (dep.platform == null ? "N/A" : dep.platform) + ";" + dep.line.name.split(' (')[0] + ";" + dep.direction + ";" + dep.stop.name + "\n")
         }
 
@@ -121,7 +121,8 @@ async function requestListener(req, res)
     else if(req.url == "/journey")
     {
         let journeys;
-        let firstJourneyLegs;
+        let journeyLegs;
+        let joruneyNr;
 
         let depStation = (await oebb.locations(req.headers['x-dep-station']))[0]
         let arrStation = (await oebb.locations(req.headers['x-arr-station']))[0]
@@ -135,14 +136,16 @@ async function requestListener(req, res)
             console.log('Error: ' + e.message)
         }
 
-        firstJourneyLegs = journeys.journeys[0].legs;
+        joruneyNr = (req.headers['x-departure-nr'] == undefined ? 0 : req.headers['x-departure-nr']);
 
-        for(let leg of firstJourneyLegs)
+        journeyLegs = journeys.journeys[joruneyNr].legs;
+
+        for(let leg of journeyLegs)
         {
             let localDep = new Date(leg.departure)
             let localArr = new Date(leg.arrival)
 
-            res.write(localDep.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) + ';' + leg.origin.name + ';' + localArr.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) + ';' + leg.destination.name + ';' + (leg.line == undefined ? "walking" : leg.line.name) + '\n')
+            res.write(localDep.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) + ';' + leg.origin.name + ';' + localArr.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) + ';' + leg.destination.name + ';' + (leg.line == undefined ? "walking" : leg.line.name.split(' (')[0]) + '\n')
         }
         
         res.end();

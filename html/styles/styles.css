@@ -8,10 +8,26 @@ body{
     font-size: 13pt;
 }
 
-#timetable{
+#controls
+{
+    display: block;
+    float: right;
+    margin: inherit;
+}
+
+table{
     width: 100%;
     color: white;
     background-color: #1010FF;
     border-collapse: collapse;
     border: none;
+    margin-bottom: 2.5em;
+}
+
+#journeytables table{
+    margin-bottom: 1em;
+}
+
+table tr{
+    text-align: left;
 }

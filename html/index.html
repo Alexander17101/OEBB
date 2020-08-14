@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ÖBB Öffi Board</title>
+    <title>Öffi Board</title>
 
     <script src="scripts/index.js"></script>
     <link rel="stylesheet" href="styles/styles.css">
@@ -14,11 +14,21 @@
     <div id="header">
         <p id="clock">XX:XX:XX</p>
         <p> / </p>
-        <p id="station">Station: </p>
+        <p id="station"></p>
+        <div id = "controls">
+            <input id="depStationTxt" type="text">
+            <p> &#10145; </p>
+            <input id="arrStationTxt" type="text">
+            <label for="busseCheckbox">Busse (wip)</label>
+            <input id="busseCheckbox" type="checkbox">
+            <button id="apply">Übernehmen</button>
+        </div>
     </div>
     <div>
+        <h1>Departures</h1>
         <table id="timetable"></table>
-        <table id="journeytable"></table>
+        <h1>Journeys</h1>
+        <div id="journeytables"></div>
     </div>
 </body>
 
