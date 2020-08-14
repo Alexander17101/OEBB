@@ -1,8 +1,10 @@
-const oebb = require('oebb-hafas')
+const createClient = require('oebb-hafas')
+const oebb = createClient('Chrome')
+
 const http = require('http');
 const fs = require('fs');
 
-const hostname = "10.0.0.71", port = 8080;
+const hostname = "192.168.1.57", port = 8080;
 
 const server = http.createServer(requestListener);
 const serverRoot = "html";
@@ -13,6 +15,7 @@ const includeActualOnlyWhenDelayed = true;
 
 //todo: implement more filters to be selectable by client side
 //todo: add textfield for station selection by client
+//todo: finish arrivals
 
 main();
 
@@ -59,7 +62,6 @@ async function requestListener(req, res)
         {
             console.log('Error: ' + e.message)
         }
-
         for (let dep of departures)
         {
             let actualDate = new Date(dep.when)
@@ -68,7 +70,7 @@ async function requestListener(req, res)
             let delayed = actualDate.getTime() != planDate.getTime()
 
             if(!includeBuses && !dep.line.name.includes('Bus'))
-                res.write(planDate.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) + ";" + (includeActualOnlyWhenDelayed && !delayed ? "" : actualDate.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }))  + ";" + (dep.platform == null ? "N/A" : dep.platform) + ";" + dep.line.name.split(' (')[0] + ";" + dep.direction + ";" + dep.station.name + "\n")
+                res.write(planDate.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) + ";" + (includeActualOnlyWhenDelayed && !delayed ? "" : actualDate.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }))  + ";" + (dep.platform == null ? "N/A" : dep.platform) + ";" + dep.line.name.split(' (')[0] + ";" + dep.direction + ";" + dep.stop.name + "\n")
         }
 
         res.end();
@@ -111,7 +113,7 @@ async function requestListener(req, res)
             let actualDate = new Date(arr.when)
             let planDate = new Date(actualDate - arr.delay * 1000)
 
-            res.write(planDate.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) + ";" + actualDate.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) + ";" + (arr.platform == null ? "N/A" : arr.platform) + ";" + arr.line.name.split(' (')[0] + ";" + arr.direction + ";" + arr.station.name + "\n")
+            res.write(planDate.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) + ";" + actualDate.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) + ";" + (arr.platform == null ? "N/A" : arr.platform) + ";" + arr.line.name.split(' (')[0] + ";" + arr.direction + ";" + arr.stop.name + "\n")
         }
 
         res.end();
@@ -133,7 +135,7 @@ async function requestListener(req, res)
             console.log('Error: ' + e.message)
         }
 
-        firstJourneyLegs = journeys[0].legs;
+        firstJourneyLegs = journeys.journeys[0].legs;
 
         for(let leg of firstJourneyLegs)
         {
@@ -142,7 +144,7 @@ async function requestListener(req, res)
 
             res.write(localDep.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) + ';' + leg.origin.name + ';' + localArr.toLocaleString('de-AT', { hour: 'numeric', minute: 'numeric' }) + ';' + leg.destination.name + ';' + (leg.line == undefined ? "walking" : leg.line.name) + '\n')
         }
-
+        
         res.end();
     }
 
