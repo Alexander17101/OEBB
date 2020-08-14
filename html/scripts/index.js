@@ -184,7 +184,7 @@ function drawJourneyTableFromCSV(csv)
 
     let tr = document.createElement('tr')
 
-    tr.innerHTML = "<th>Abfahrt</th><th>Von</th><th>Ankuft</th><th>In</th><th>Linie</th>"
+    tr.innerHTML = "<th>Abfahrt</th><th>Von</th><th>Ankunft</th><th>In</th><th>Linie</th>"
 
     table.appendChild(tr);
 

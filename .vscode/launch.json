@@ -6,7 +6,7 @@
     "compounds": [
         {
             "name": "WebApp",
-            "configurations": ["Launch Program"]
+            "configurations": ["Launch Program", "Launch Chrome"]
         }
     ],
     "configurations": [
