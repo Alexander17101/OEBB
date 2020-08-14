@@ -8,6 +8,19 @@ body{
     font-size: 13pt;
 }
 
+#header div{
+    display: inline-block;
+}
+
+h1{
+    display: block;
+}
+
+button{
+    height: 30px;
+    margin: 0.5em;
+}
+
 #controls
 {
     display: block;
@@ -30,4 +43,35 @@ table{
 
 table tr{
     text-align: left;
+}
+
+@media only screen and (max-width: 1200px) {
+    #header div{
+        display: block;
+        float: left;
+        width: 100%;
+        
+        margin: 0.1em;
+    }
+
+    button{
+        height: 30px;
+        margin-left: 0;
+    }
+
+    input{
+        height: 25px;
+    }
+
+    body{
+        font-size: 16pt;
+    }
+    
+    #header p{
+        font-size: 18pt;
+    }
+
+    h1{
+        font-size: 20pt;
+    }
 }

@@ -76,7 +76,8 @@ function applySettings()
         arrInput.style.borderColor = 'red'
     }
 
-    refreshInfo();
+    if(newDep && newArr)
+        refreshInfo();
 }
 
 function drawTimetable()

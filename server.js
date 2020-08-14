@@ -4,7 +4,7 @@ const oebb = createClient('Chrome')
 const http = require('http');
 const fs = require('fs');
 
-const hostname = "localhost", port = 8080;
+const hostname = "192.168.1.57", port = 8080;
 
 const server = http.createServer(requestListener);
 const serverRoot = "html";
