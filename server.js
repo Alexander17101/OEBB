@@ -45,10 +45,6 @@ async function requestListener(req, res)
             entrances: true, // parse & expose entrances of stops/stations?
             linesOfStops: false, // parse & expose lines at the stop/station?
             remarks: true, // parse & expose hints & warnings?
-            stopovers: false, // fetch & parse previous/next stopovers?
-            // departures at related stations
-            // e.g. those that belong together on the metro map.
-            includeRelatedStations: true,
             language: 'de' // language to get results in
         }
 

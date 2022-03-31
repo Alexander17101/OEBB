@@ -7,6 +7,6 @@ to launch:
 
 2. change ip in server.js (if necessary)
 
-3. launch start.bat on windows or simply type "node server.js" in your CLI
+3. run npm start in your cli
 
 4. launch your browser with the correct ip and port

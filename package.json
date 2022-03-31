@@ -1,1 +1,22 @@
-{}
+{
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "oebb",
+  "description": "Webapp for timetables and journeys of the Austrian Federal Railways",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alexander17101/OEBB.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alexander17101/OEBB/issues"
+  },
+  "homepage": "https://github.com/Alexander17101/OEBB#readme",
+  "dependencies": {
+    "oebb-hafas": "^5.0.0"
+  }
+}
