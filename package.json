@@ -4,8 +4,8 @@
   },
   "name": "oebb",
   "type": "module",
-  "description": "Webapp for timetables and journeys of the Austrian Federal Railways",
-  "version": "1.0.0",
+  "description": "Small webapp for timetables and journeys of the Austrian Federal Railways",
+  "version": "1.2.0",
   "main": "server.js",
   "repository": {
     "type": "git",
