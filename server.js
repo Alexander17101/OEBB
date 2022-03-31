@@ -1,10 +1,10 @@
-const createClient = require('oebb-hafas')
+import http from "http"
+import fs from "fs"
+import express from "express"
+import createClient from "oebb-hafas"
+
 const oebb = createClient('Chrome')
-
-const http = require('http');
-const fs = require('fs');
-
-const hostname = "127.0.0.1", port = 8080;
+const hostname = "localhost", port = 8080;
 
 const server = http.createServer(requestListener);
 const serverRoot = "html";

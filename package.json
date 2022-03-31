@@ -3,6 +3,7 @@
     "start": "node server.js"
   },
   "name": "oebb",
+  "type": "module",
   "description": "Webapp for timetables and journeys of the Austrian Federal Railways",
   "version": "1.0.0",
   "main": "server.js",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/Alexander17101/OEBB#readme",
   "dependencies": {
+    "express": "^4.17.3",
     "oebb-hafas": "^5.0.0"
   }
 }
